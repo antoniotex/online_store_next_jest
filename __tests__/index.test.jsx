@@ -28,7 +28,7 @@ describe("Home page", () => {
     render(<Home products={mockProducts} categories={mockCategories} />);
     const allCategories = screen.getByRole("list", { name: /categories/i });
     const { getAllByRole } = within(allCategories);
-    const listItems = getAllByRole("listitem");
+    const listItems = getAllByRole("listitem", { name: /category/i });
     expect(listItems.length).toBe(mockCategories.length);
   });
   // it("renders all categories", () => {});

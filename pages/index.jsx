@@ -8,8 +8,6 @@ export async function getStaticProps(context) {
   const { data: products } = await commerce.products.list();
   const { data: categories } = await commerce.categories.list();
 
-  console.log("DATA", categories[1]);
-
   return { props: { products, categories }, revalidate: 30 };
 }
 
@@ -24,10 +22,22 @@ export default function Home({ products, categories }) {
       </Head>
       <main className={styles.main}>
         <input type="text" role="searchbox" title="Search" />
-
         <ul aria-label="Categories">
           {categories.map((category) => {
-            return <li key={category.id}>{category.name}</li>;
+            return (
+              <li aria-label="category" key={category.id}>
+                <h2 id={`category-${category.name}`}>{category.name}</h2>
+                <ul aria-labelledby={`category-${category.name}`}>
+                  {products
+                    .filter((product) =>
+                      product.categories.find((c) => c.id === category.id)
+                    )
+                    .map((product) => {
+                      return <li key={product.id}>{product.name}</li>;
+                    })}
+                </ul>
+              </li>
+            );
           })}
         </ul>
 
