@@ -32,6 +32,7 @@ export default function Home({ products, categories }) {
                     .filter((product) =>
                       product.categories.find((c) => c.id === category.id)
                     )
+                    .slice(0, 1)
                     .map((product) => {
                       return <li key={product.id}>{product.name}</li>;
                     })}

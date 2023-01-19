@@ -31,7 +31,14 @@ describe("Home page", () => {
     const listItems = getAllByRole("listitem", { name: /category/i });
     expect(listItems.length).toBe(mockCategories.length);
   });
-  // it("renders all categories", () => {});
-  // it("renders 1 product per category", () => {});
+
+  it("renders 1 product per category", () => {
+    render(<Home products={mockProducts} categories={mockCategories} />);
+    const categoryList = screen.getByRole("list", { name: /Mouse/i });
+    const { getAllByRole } = within(categoryList);
+    const listItems = getAllByRole("listitem");
+    expect(listItems.length).toBe(1);
+  });
+
   // it("show search results when search item is not empty", () => {});
 });
