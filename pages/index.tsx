@@ -15,6 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <input type="text" role="searchbox" title="Search" />
         <h2>All Products</h2>
       </main>
     </>

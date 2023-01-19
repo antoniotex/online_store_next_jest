@@ -7,4 +7,10 @@ describe("Home page", () => {
     render(<Home />);
     screen.getByRole("heading", { name: /All products/i });
   });
+
+  it("render a acessible search box", () => {
+    render(<Home />);
+    const searchInput = screen.getByRole("searchbox");
+    expect(searchInput).toHaveAccessibleName("Search");
+  });
 });
