@@ -22,4 +22,19 @@ describe("Cart Detail Page", () => {
     const listItems = getAllByRole("listitem");
     expect(listItems.length).toBe(2);
   });
+
+  it("renders a message if cart is empty", () => {
+    render(
+      <CartDetail
+        cart={{
+          subtotal: { formatted_with_symbol: "R$0", raw: 0 },
+          line_items: [],
+        }}
+        updateQuantity={jest.fn()}
+        emptyCart={jest.fn()}
+      />
+    );
+
+    screen.getByText(/Please Buy something/i);
+  });
 });
