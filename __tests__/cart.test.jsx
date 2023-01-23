@@ -49,4 +49,11 @@ describe("Cart Detail Page", () => {
 
     screen.getByText(/Loading .../i);
   });
+
+  it("render line items correctly", () => {
+    renderCartDetail();
+
+    screen.getByText(/R\$850 X 2 = R\$1700/i);
+    screen.getByText(/R\$750 X 3 = R\$2250/i);
+  });
 });

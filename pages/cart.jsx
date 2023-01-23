@@ -21,7 +21,11 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
               {cart.line_items.map((item) => {
                 return (
                   <li key={item.id}>
-                    {item.name} - {item.quantity}
+                    <p>{item.name}</p>
+                    <small>
+                      {item.price.formatted_with_symbol} X {item.quantity} ={" "}
+                      {item.line_total.formatted_with_symbol}
+                    </small>
                   </li>
                 );
               })}
