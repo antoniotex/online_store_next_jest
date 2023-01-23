@@ -17,22 +17,22 @@ export const mockCategories = [
 
 export const mockCart = {
   id: "cart_0o3ND70JjY6g8w",
-  subtotal: { formatted_with_symbol: "₹3950", raw: 3950 },
+  subtotal: { formatted_with_symbol: "R$3950", raw: 3950 },
   line_items: [
     {
       id: "item_7RyWOwmK5nEa2V",
       name: "Monitor",
       permalink: "e1234",
-      price: { raw: 850, formatted_with_symbol: "₹850" },
-      line_total: { formatted_with_symbol: "₹1700" },
+      price: { raw: 850, formatted_with_symbol: "R$850" },
+      line_total: { formatted_with_symbol: "R$1700" },
       quantity: 2,
     },
     {
       id: "cart_2",
       name: "Gaming Mouse",
       permalink: "e1234",
-      price: { raw: 750, formatted_with_symbol: "₹750" },
-      line_total: { formatted_with_symbol: "₹2250" },
+      price: { raw: 750, formatted_with_symbol: "R$750" },
+      line_total: { formatted_with_symbol: "R$2250" },
       quantity: 3,
     },
   ],
@@ -50,7 +50,7 @@ export const mock_checkout_token = {
       price: {
         raw: 0,
         formatted: "0.00",
-        formatted_with_symbol: "₹0.00",
+        formatted_with_symbol: "R$0.00",
         formatted_with_code: "0.00 INR",
       },
       countries: ["IN"],
@@ -61,7 +61,7 @@ export const mock_checkout_token = {
       price: {
         raw: 10,
         formatted: "10.00",
-        formatted_with_symbol: "₹10.00",
+        formatted_with_symbol: "R$10.00",
         formatted_with_code: "10.00 INR",
       },
       countries: ["BD"],
@@ -69,15 +69,15 @@ export const mock_checkout_token = {
   ],
   live: {
     total: {
-      formatted_with_symbol: "₹3950",
+      formatted_with_symbol: "R$3950",
     },
     line_items: [
       {
         id: "item_7RyWOwmK5nEa2V",
         product_name: "Monitor",
         permalink: "e1234",
-        price: { raw: 850, formatted_with_symbol: "₹850" },
-        line_total: { formatted_with_symbol: "₹1700" },
+        price: { raw: 850, formatted_with_symbol: "R$850" },
+        line_total: { formatted_with_symbol: "R$1700" },
         quantity: 2,
       },
     ],
