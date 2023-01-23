@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }) {
     let response = await commerce.cart.update(productID, {
       quantity: quantity,
     });
-    setCart(response.cart);
+    setCart(response);
     return;
   };
 

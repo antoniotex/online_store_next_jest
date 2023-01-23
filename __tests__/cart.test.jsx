@@ -1,4 +1,9 @@
-import { render, screen, within } from "@testing-library/react";
+import {
+  render,
+  screen,
+  within,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import CartDetail from "../pages/cart";
@@ -14,13 +19,16 @@ const renderCartDetail = () =>
   );
 
 describe("Cart Detail Page", () => {
-  it("render total cart price", () => {
+  it("render cart details correctly", () => {
     renderCartDetail();
     screen.getByText(/Cart Total Price : R\$3950/i);
     const line_items = screen.getByRole("list", { name: /cart items/i });
     const { getAllByRole } = within(line_items);
     const listItems = getAllByRole("listitem");
     expect(listItems.length).toBe(2);
+
+    screen.getByRole("button", { name: /Empty Cart/i });
+    screen.getByRole("link", { name: /Checkout/i });
   });
 
   it("renders a message if cart is empty", () => {
@@ -55,5 +63,47 @@ describe("Cart Detail Page", () => {
 
     screen.getByText(/R\$850 X 2 = R\$1700/i);
     screen.getByText(/R\$750 X 3 = R\$2250/i);
+  });
+
+  it("increments line item`s quantity correctly", async () => {
+    const updateQuantity = jest.fn();
+    render(
+      <CartDetail
+        cart={mockCart}
+        updateQuantity={updateQuantity}
+        emptyCart={jest.fn()}
+      />
+    );
+
+    const firstItem = screen.getAllByRole("listitem")[0];
+    const { getByRole } = within(firstItem);
+    const incrementBtn = getByRole("button", { name: "+" });
+
+    await userEvent.click(incrementBtn);
+
+    expect(updateQuantity).toBeCalled();
+    expect(updateQuantity).toBeCalledWith(3, "item_7RyWOwmK5nEa2V");
+    // await waitForElementToBeRemoved(() => screen.getByText(/updating/i));
+  });
+
+  it("decrements line item's quantity correctly", async () => {
+    const updateQuantity = jest.fn();
+    render(
+      <CartDetail
+        cart={mockCart}
+        updateQuantity={updateQuantity}
+        emptyCart={jest.fn()}
+      />
+    );
+
+    const firstItem = screen.getAllByRole("listitem")[0];
+    const { getByRole } = within(firstItem);
+    const decrementBtn = getByRole("button", { name: "-" });
+
+    await userEvent.click(decrementBtn);
+
+    expect(updateQuantity).toBeCalled();
+    expect(updateQuantity).toBeCalledWith(1, "item_7RyWOwmK5nEa2V");
+    // await waitForElementToBeRemoved(() => screen.getByText(/updating/i));
   });
 });

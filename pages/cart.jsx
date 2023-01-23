@@ -1,6 +1,12 @@
 import Head from "next/head";
+import Link from "next/link";
 
 export default function CartDetail({ cart, updateQuantity, emptyCart }) {
+  const handleUpdateQuantity = async (quantity, productID) => {
+    console.log("entrei");
+    await updateQuantity(quantity, productID);
+  };
+
   if (!cart) return <span>Loading ...</span>;
   return (
     <div>
@@ -26,10 +32,34 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
                       {item.price.formatted_with_symbol} X {item.quantity} ={" "}
                       {item.line_total.formatted_with_symbol}
                     </small>
+
+                    <div>
+                      <button
+                        onClick={() => {
+                          handleUpdateQuantity(item.quantity + 1, item.id);
+                        }}
+                      >
+                        +
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button
+                        onClick={() => {
+                          handleUpdateQuantity(item.quantity - 1, item.id);
+                        }}
+                      >
+                        -
+                      </button>
+                    </div>
                   </li>
                 );
               })}
             </ul>
+            <div>
+              <button>Empty Cart</button>
+              <button>
+                <Link href="/checkout">Checkout</Link>
+              </button>
+            </div>
           </>
         ) : (
           <p>Please Buy something from our store</p>
