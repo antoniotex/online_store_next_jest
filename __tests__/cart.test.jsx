@@ -37,4 +37,16 @@ describe("Cart Detail Page", () => {
 
     screen.getByText(/Please Buy something/i);
   });
+
+  it("renders a loading if cart is undefined", () => {
+    render(
+      <CartDetail
+        cart={undefined}
+        updateQuantity={jest.fn()}
+        emptyCart={jest.fn()}
+      />
+    );
+
+    screen.getByText(/Loading .../i);
+  });
 });
