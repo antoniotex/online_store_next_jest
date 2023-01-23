@@ -55,7 +55,7 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
               })}
             </ul>
             <div>
-              <button>Empty Cart</button>
+              <button onClick={emptyCart}>Empty Cart</button>
               <button>
                 <Link href="/checkout">Checkout</Link>
               </button>

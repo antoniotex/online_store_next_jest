@@ -106,4 +106,19 @@ describe("Cart Detail Page", () => {
     expect(updateQuantity).toBeCalledWith(1, "item_7RyWOwmK5nEa2V");
     // await waitForElementToBeRemoved(() => screen.getByText(/updating/i));
   });
+
+  it("empties our cart when clicked on empty cart btn", async () => {
+    const emptyCart = jest.fn();
+    render(
+      <CartDetail
+        cart={mockCart}
+        updateQuantity={jest.fn()}
+        emptyCart={emptyCart}
+      />
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: /empty Cart/i }));
+
+    expect(emptyCart).toBeCalled();
+  });
 });

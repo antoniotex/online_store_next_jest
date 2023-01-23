@@ -42,7 +42,7 @@ export default function App({ Component, pageProps }) {
   //    empty the cart
   const emptyCart = async () => {
     let response = await commerce.cart.empty();
-    setCart(response.cart);
+    setCart(response);
   };
 
   //    refresh the  cart
