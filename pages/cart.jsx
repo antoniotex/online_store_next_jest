@@ -1,10 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function CartDetail({ cart, updateQuantity, emptyCart }) {
+  const [loading, setLoading] = useState();
   const handleUpdateQuantity = async (quantity, productID) => {
-    console.log("entrei");
+    setLoading(productID);
     await updateQuantity(quantity, productID);
+    setLoading();
   };
 
   if (!cart) return <span>Loading ...</span>;
@@ -34,21 +37,27 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
                     </small>
 
                     <div>
-                      <button
-                        onClick={() => {
-                          handleUpdateQuantity(item.quantity + 1, item.id);
-                        }}
-                      >
-                        +
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button
-                        onClick={() => {
-                          handleUpdateQuantity(item.quantity - 1, item.id);
-                        }}
-                      >
-                        -
-                      </button>
+                      {loading === item.id ? (
+                        "updating"
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => {
+                              handleUpdateQuantity(item.quantity + 1, item.id);
+                            }}
+                          >
+                            +
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button
+                            onClick={() => {
+                              handleUpdateQuantity(item.quantity - 1, item.id);
+                            }}
+                          >
+                            -
+                          </button>
+                        </>
+                      )}
                     </div>
                   </li>
                 );

@@ -104,6 +104,7 @@ describe("Cart Detail Page", () => {
 
     expect(updateQuantity).toBeCalled();
     expect(updateQuantity).toBeCalledWith(1, "item_7RyWOwmK5nEa2V");
+
     // await waitForElementToBeRemoved(() => screen.getByText(/updating/i));
   });
 
